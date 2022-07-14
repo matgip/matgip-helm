@@ -1,0 +1,9 @@
+# If true, magip database injection happens. otherwise yamls are original
+enabled: true
+
+db:
+  name: "matgip-db"
+  watchNamespace: "matgip"
+  image: "redis:latest"
+  port: "6379"
+  runCommand: "redis-server"

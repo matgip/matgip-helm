@@ -1,0 +1,8 @@
+apiVersion: v2
+appVersion: v1.0.0
+dependencies:
+  - condition: matgip-db.enabled
+    name: matgip-db
+description: Matgip web server
+name: matgip-service
+version: 1.0.0

@@ -1,0 +1,29 @@
+{{- if .Values.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.web.name }}
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: {{ .Values.web.name }}
+  template:
+    metadata:
+      name: {{ .Values.web.name }}
+      labels:
+        app: {{ .Values.web.name }}
+        {{- if .Values.web.watchNamespace }}
+        appNamespace: {{ .Values.web.watchNamespace }}
+        {{- end }}
+    spec:
+      containers:
+      - name: {{ .Values.web.name }}
+        image: {{ .Values.web.image }}
+        ports:
+        - containerPort: {{ .Values.web.port }}
+          name: {{ .Values.web.name }}
+        env:
+        - name: REDIS_HOST
+          value: {{ .Values.web.dbName }}
+{{- end -}}

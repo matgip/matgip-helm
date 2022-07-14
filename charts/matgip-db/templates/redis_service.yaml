@@ -1,0 +1,19 @@
+{{- if .Values.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.db.name }}
+  labels:
+    app: {{ .Values.db.name }}
+spec:
+  selector:
+    app: {{ .Values.db.name }}
+    {{- if .Values.db.watchNamespace }}
+    appNamespace: {{ .Values.db.watchNamespace }}
+    {{- end }}
+  ports:
+  - protocol: TCP
+    name: matgip-db
+    port: {{ .Values.db.port }}
+    targetPort: {{ .Values.db.port }}
+{{- end -}}

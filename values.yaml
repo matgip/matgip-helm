@@ -1,0 +1,11 @@
+enabled: true
+
+web:
+  name: "matgip-web"
+  watchNamespace: "matgip"
+  image: "junhong1991/matgip:1.0.0"
+  port: "3000"
+  dbName: "matgip-db"
+
+ingress:
+  hostName: "matgip.com"
