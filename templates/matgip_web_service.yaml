@@ -11,11 +11,9 @@ spec:
     {{- if .Values.web.watchNamespace }}
     appNamespace: {{ .Values.web.watchNamespace }}
     {{- end }}
-  type: NodePort
   ports:
   - protocol: TCP
-    name: matgip-web
-    nodePort: 31637
+    name: {{ .Values.web.name }}-port
     port: {{ .Values.web.port }}
     targetPort: {{ .Values.web.port }}
 {{- end -}}

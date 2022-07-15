@@ -17,6 +17,7 @@ spec:
         appNamespace: {{ .Values.web.watchNamespace }}
         {{- end }}
     spec:
+      serviceAccountName: {{ include "matgip.serviceAccountName" . }}
       containers:
       - name: {{ .Values.web.name }}
         image: {{ .Values.web.image }}
@@ -26,4 +27,19 @@ spec:
         env:
         - name: REDIS_HOST
           value: {{ .Values.web.dbName }}
+        - name: NAVER_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "matgip.secretName" . }}
+              key: news-client-id
+        - name: NAVER_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "matgip.secretName" . }}
+              key: news-client-secret
+        - name: TOKEN_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "matgip.secretName" . }}
+              key: token-secret
 {{- end -}}
